@@ -5,38 +5,54 @@ import os
 
 app = FastAPI()
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# Load profile data safely
+try:
+    with open("profile_data.txt", "r", encoding="utf-8") as f:
+        profile_data = f.read()
+except Exception:
+    profile_data = "Profile data not available."
 
-# Load profile data
-with open("profile_data.txt", "r") as f:
-    profile_info = f.read()
+# Initialize OpenAI client with timeout
+client = OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY"),
+    timeout=30.0
+)
 
+# Request model
 class Question(BaseModel):
     message: str
 
+
 @app.post("/chat")
-def chat(question: Question):
-    prompt = f"""
-    You are the AI assistant for Keerthana Bellam's portfolio.
+async def chat(question: Question):
+    try:
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": f"""
+You are Keerthana's professional AI assistant.
 
-    Only answer using the information below.
-    If unknown, respond exactly with:
+Answer questions ONLY using the information below.
+If the question is unrelated or not found in the profile,
+say: "I don't have that information. Please contact Keerthana directly at keerthanabellam23@gmail.com or via LinkedIn."
 
-    "I don't have that information yet.
-    You can contact Keerthana at:
-    Email: keerthanabellam23@gmail.com
-    LinkedIn: https://linkedin.com/in/YOUR-LINK"
+Profile Information:
+{profile_data}
+"""
+                },
+                {
+                    "role": "user",
+                    "content": question.message
+                }
+            ]
+        )
 
-    Information:
-    {profile_info}
+        return {
+            "response": response.choices[0].message.content
+        }
 
-    Question:
-    {question.message}
-    """
-
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}]
-    )
-
-    return {"reply": response.choices[0].message.content}
+    except Exception as e:
+        return {
+            "response": "Temporary AI connection issue. Please try agai
