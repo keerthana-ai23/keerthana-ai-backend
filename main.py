@@ -12,7 +12,7 @@ try:
 except Exception:
     profile_data = "Profile data not available."
 
-# Initialize OpenAI client with timeout
+# Initialize OpenAI client
 client = OpenAI(
     api_key=os.getenv("OPENAI_API_KEY"),
     timeout=30.0
@@ -53,8 +53,9 @@ Profile Information:
             "response": response.choices[0].message.content
         }
 
- except Exception as e:
-    return {
-        "response": "Temporary AI connection issue. Please try again in a few seconds."
-    }
+    except Exception:
+        return {
+            "response": "Temporary AI connection issue. Please try again in a few seconds."
+        }
+
 
