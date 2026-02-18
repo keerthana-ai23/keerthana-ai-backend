@@ -5,57 +5,42 @@ import os
 
 app = FastAPI()
 
-# Load profile data safely
-try:
-    with open("profile_data.txt", "r", encoding="utf-8") as f:
-        profile_data = f.read()
-except Exception:
-    profile_data = "Profile data not available."
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-# Initialize OpenAI client
-client = OpenAI(
-    api_key=os.getenv("OPENAI_API_KEY"),
-    timeout=30.0
-)
-
-# Request model
 class Question(BaseModel):
     message: str
 
+# Load profile data
+with open("profile_data.txt", "r", encoding="utf-8") as f:
+    profile_content = f.read()
+
+@app.get("/")
+def root():
+    return {"status": "Backend is running"}
 
 @app.post("/chat")
-async def chat(question: Question):
+def chat(question: Question):
     try:
         response = client.chat.completions.create(
             model="gpt-4o-mini",
             messages=[
                 {
                     "role": "system",
-                    "content": f"""
-You are Keerthana's professional AI assistant.
-
-Answer questions ONLY using the information below.
-If the question is unrelated or not found in the profile,
-say: "I don't have that information. Please contact Keerthana directly at keerthanabellam23@gmail.com or via LinkedIn."
-
-Profile Information:
-{profile_data}
-"""
+                    "content": f"You are an AI assistant that answers questions based only on this profile:\n\n{profile_content}"
                 },
                 {
                     "role": "user",
                     "content": question.message
                 }
-            ]
+            ],
+            temperature=0.5,
         )
 
         return {
             "response": response.choices[0].message.content
         }
 
-    except Exception:
+    except Exception as e:
         return {
-            "response": "Temporary AI connection issue. Please try again in a few seconds."
+            "response": f"Error: {str(e)}"
         }
-
-
