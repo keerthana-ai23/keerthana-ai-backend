@@ -53,6 +53,8 @@ Profile Information:
             "response": response.choices[0].message.content
         }
 
-    except Exception as e:
-        return {
-            "response": "Temporary AI connection issue. Please try agai
+ except Exception as e:
+    return {
+        "response": "Temporary AI connection issue. Please try again in a few seconds."
+    }
+
