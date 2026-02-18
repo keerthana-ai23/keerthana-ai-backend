@@ -1,0 +1,64 @@
+Name: Keerthana Bellam
+Location: New Jersey, USA
+Email: keerthanabellam23@gmail.com
+LinkedIn: https://linkedin.com/in/YOUR-LINK
+
+Professional Summary:
+Keerthana Bellam is a Data Science graduate student specializing in Machine Learning, Cloud Technologies, and Generative AI systems. She has hands-on experience building AI-driven solutions, deploying scalable data pipelines, and integrating LLM-powered applications. Her focus is on designing intelligent systems that combine machine learning, cloud infrastructure, and real-world impact.
+
+Education:
+Master of Science in Data Science – Rowan University, USA (Expected May 2026)
+Bachelor of Technology in Computer Science Engineering – India (2024)
+
+Core Expertise:
+- Generative AI & LLM Applications
+- Prompt Engineering & AI System Design
+- Machine Learning (Regression, Classification, Random Forest, SVM)
+- Deep Learning & Neural Networks
+- Data Engineering & ETL Pipelines
+- Cloud Platforms: AWS, Azure, Oracle Cloud
+- SQL & Distributed Databases (Snowflake, Cassandra)
+
+Professional Experience:
+
+Data Analyst – Builtin Tech (2022)
+- Designed scalable data models in Snowflake on AWS to support analytical workloads.
+- Automated ETL/ELT pipelines, improving efficiency by 30%.
+- Optimized complex SQL queries for large-scale cloud data environments.
+- Applied data governance and structured analytics for business insights.
+
+Main Office Assistant – Rowan Recreation Center (2025–Present)
+- Managed and structured operational data for reporting and performance analysis.
+- Generated analytical summaries supporting data-driven decision-making.
+
+AI & Machine Learning Projects:
+
+Heart Rate Estimation using rPPG (Deep Learning)
+- Developed a non-contact physiological monitoring system.
+- Processed video-based signals using deep learning techniques.
+- Applied signal processing and neural network modeling.
+
+Smart Farming Analytics (ML + AI System Design)
+- Built predictive models using Random Forest for crop yield forecasting.
+- Implemented TensorFlow-based pest detection model.
+- Designed interactive dashboards for agricultural intelligence.
+
+Health Welfare AI Model
+- Developed ML-based behavioral prediction system for mental health detection.
+- Applied Sentiment Analysis and SVM for pattern recognition.
+- Integrated multi-modal data sources for predictive modeling.
+
+Generative AI Focus:
+- Building LLM-powered chatbot systems using OpenAI APIs.
+- Designing Retrieval-Augmented Generation (RAG) pipelines.
+- Deploying AI applications with FastAPI and cloud hosting platforms.
+- Integrating frontend and backend architectures for intelligent web systems.
+
+Certifications:
+- AWS Certified Cloud Practitioner
+- Microsoft Azure Fundamentals
+- Oracle Cloud Infrastructure Architect Associate
+- Automation Anywhere RPA Certification
+
+Career Objective:
+Aspiring Generative AI Engineer focused on building scalable LLM-powered systems, AI-driven automation tools, and intelligent decision-support platforms that combine machine learning, cloud infrastructure, and user-centric design.
