@@ -35,6 +35,16 @@ def root():
 
 @app.post("/chat")
 def chat(question: Question):
+    user_message = question.message.lower()
+
+    # Handle greetings naturally
+    greetings = ["hi", "hello", "hey", "how are you", "good morning"]
+
+    if any(greet in user_message for greet in greetings):
+        return {
+            "response": "Hey 👋 I'm doing great! You can ask me about Keerthana’s experience, projects, or skills."
+        }
+
     try:
         response = client.chat.completions.create(
             model="gpt-4o-mini",
@@ -43,9 +53,9 @@ def chat(question: Question):
                     "role": "system",
                     "content": f"""
 You are Keerthana's professional AI assistant.
-Answer ONLY using the information below.
-If the question is unrelated, respond:
-"I don’t have that specific information. Please contact Keerthana directly."
+
+Answer questions using her profile information below.
+If the question is outside her resume, politely redirect to contact her.
 
 PROFILE:
 {profile_content}
@@ -56,14 +66,14 @@ PROFILE:
                     "content": question.message
                 }
             ],
-            temperature=0.5,
+            temperature=0.6,
         )
 
         return {
             "response": response.choices[0].message.content
         }
 
-    except Exception as e:
+    except:
         return {
-            "response": "⚠️ The AI service is temporarily unavailable. Please try again."
+            "response": "⚠️ AI service temporarily unavailable."
         }
