@@ -6,10 +6,12 @@ import os
 
 app = FastAPI()
 
-# ✅ ADD CORS (THIS FIXES NETLIFY ERROR)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # For now allow all (safe for portfolio)
+    allow_origins=[
+        "https://hilarious-alpaca-bc6ce0.netlify.app"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
