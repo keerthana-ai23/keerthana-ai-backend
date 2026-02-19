@@ -35,14 +35,14 @@ def root():
 
 @app.post("/chat")
 def chat(question: Question):
-    user_message = question.message.lower()
+    user_message = question.message.lower().strip()
 
-    # Handle greetings naturally
-    greetings = ["hi", "hello", "hey", "how are you", "good morning"]
+    # Smart greeting detection
+    greetings = ["hi", "hello", "hey", "how are you", "good morning", "good evening"]
 
-    if any(greet in user_message for greet in greetings):
+    if user_message in greetings:
         return {
-            "response": "Hey 👋 I'm doing great! You can ask me about Keerthana’s experience, projects, or skills."
+            "response": "Hey 👋 I'm Keerthana’s AI assistant. You can ask me about her experience, projects, or skills!"
         }
 
     try:
@@ -52,10 +52,12 @@ def chat(question: Question):
                 {
                     "role": "system",
                     "content": f"""
-You are Keerthana's professional AI assistant.
+You are Keerthana's friendly and professional AI assistant.
 
-Answer questions using her profile information below.
-If the question is outside her resume, politely redirect to contact her.
+Be warm, confident, and conversational.
+
+Answer using the profile information below.
+If the question is unrelated to her background, politely redirect.
 
 PROFILE:
 {profile_content}
@@ -66,7 +68,7 @@ PROFILE:
                     "content": question.message
                 }
             ],
-            temperature=0.6,
+            temperature=0.7,
         )
 
         return {
@@ -75,5 +77,5 @@ PROFILE:
 
     except:
         return {
-            "response": "⚠️ AI service temporarily unavailable."
+            "response": "⚠️ Something went wrong. Please try again."
         }
